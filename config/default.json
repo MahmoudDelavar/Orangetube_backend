@@ -1,0 +1,7 @@
+{
+    "name":"Bookstors Project",
+    "DB":{
+        "address":"mongodb://127.0.0.1:27017/Bookstors"
+    },
+    "jwt_key":"klsjdfhg84982345897Byus6LKHJU8V8448b5vq39"
+}

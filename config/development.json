@@ -1,0 +1,9 @@
+{
+    "name":"Bookstors Project - Development",
+    "DB":{
+        "address":"mongodb://localhost:27017/Bookstors"
+    },
+    "PORT":4000
+    
+    
+}
