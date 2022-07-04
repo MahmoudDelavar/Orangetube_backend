@@ -17,7 +17,14 @@ module.exports = new (class extends controller {
     }
 
     product = new this.Product(
-      _.pick(req.body, ["title", "writer", "count", "price"])
+      _.pick(req.body, [
+        "title",
+        "writer",
+        "count",
+        "pric",
+        "explan",
+        "category",
+      ])
     );
 
     await product.save();
@@ -25,7 +32,14 @@ module.exports = new (class extends controller {
       res,
       message: "successfuly  added book",
       code: 202,
-      data: _.pick(product, ["title", "writer", "count", "price"]),
+      data: _.pick(product, [
+        "title",
+        "writer",
+        "count",
+        "pric",
+        "explan",
+        "category",
+      ]),
     });
     console.log("body:", req.body);
   }

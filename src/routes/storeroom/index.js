@@ -5,7 +5,7 @@ const { storeroomValidator } = require("./validator");
 //-----------------------------------------
 
 router.post(
-  "/storeroom",
+  "/",
   storeroomValidator(),
   controller.validate,
   controller.storeroom
