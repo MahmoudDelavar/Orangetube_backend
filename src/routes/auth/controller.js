@@ -36,10 +36,9 @@ module.exports = new (class extends controller {
   async login(req, res) {
     const user = await this.User.findOne({ email: req.body.email });
     if (!user) {
-      console.log("searching msg: درست نیس ");
       return this.response({
         res,
-        message: " invalid Email or password",
+        message: " رمز عبور ویا ایمیل صحیح نیست",
         code: 400,
       });
     }
@@ -47,14 +46,14 @@ module.exports = new (class extends controller {
     if (!isValid) {
       return this.response({
         res,
-        message: " invalid Email or password",
+        message: "  رمز عبور ویا ایمیل صحیح نیست",
         code: 400,
       });
     }
     const token = jwt.sign({ _id: user.id }, config.get("jwt_key"));
     this.response({
       res,
-      message: "successfuly logedin",
+      message: "خوش آمدید ",
       code: 200,
       data: { token },
     });
