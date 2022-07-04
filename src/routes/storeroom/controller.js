@@ -4,8 +4,8 @@ const _ = require("lodash");
 //-----------------------------------------------------
 
 module.exports = new (class extends controller {
-  //----------Storeroome Controller-----
-  async storeroom(req, res) {
+  //----------Storeroome Controllers-----
+  async addProduct(req, res) {
     let product = await this.Product.findOne({ title: req.body.title });
     if (product) {
       return this.response({
@@ -42,5 +42,10 @@ module.exports = new (class extends controller {
       ]),
     });
     console.log("body:", req.body);
+  }
+
+  async getProducts(req, res) {
+    let books = await this.Product.find().exec();
+    this.response({ res, message: "load all Books", code: 200, data: books });
   }
 })();

@@ -8,8 +8,10 @@ router.post(
   "/",
   storeroomValidator(),
   controller.validate,
-  controller.storeroom
+  controller.addProduct
 );
+
+router.get("/", controller.getProducts);
 //------------------------------------------
 
 module.exports = router;
