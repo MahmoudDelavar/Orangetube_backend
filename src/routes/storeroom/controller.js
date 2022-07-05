@@ -11,8 +11,8 @@ module.exports = new (class extends controller {
       return this.response({
         res,
         code: 400,
-        message: " Sorry this Book registeres",
-        code: 400,
+        message: "این کتاب قبلا ثیت شده است ",
+        data: null,
       });
     }
 
@@ -30,7 +30,7 @@ module.exports = new (class extends controller {
     await product.save();
     this.response({
       res,
-      message: "successfuly  added book",
+      message: "کتاب با موفقیت ثبت شد ",
       code: 202,
       data: _.pick(product, [
         "title",
