@@ -41,11 +41,15 @@ module.exports = new (class extends controller {
         "category",
       ]),
     });
-    console.log("body:", req.body);
+    console.log("added new book to database ");
   }
 
   async getProducts(req, res) {
-    let books = await this.Product.find().exec();
+    let category = req.query.category;
+
+    let books = await this.Product.find({ category: category })
+      .sort({ createdAt: -1 })
+      .exec();
     this.response({ res, message: "load all Books", code: 200, data: books });
   }
 })();
