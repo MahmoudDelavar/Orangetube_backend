@@ -46,10 +46,23 @@ module.exports = new (class extends controller {
 
   async getProducts(req, res) {
     let category = req.query.category;
-
     let books = await this.Product.find({ category: category })
       .sort({ createdAt: -1 })
       .exec();
-    this.response({ res, message: "load all Books", code: 200, data: books });
+    this.response({ res, message: "load the Books ", code: 200, data: books });
+  }
+  async getProduct(req, res) {
+    let bookName = req.query.title;
+    let books = await this.Product.findOne({ title: bookName }).exec();
+
+    if (!books) {
+      return this.response({
+        res,
+        message: "کتاب مورد نظر یافت ",
+        code: 400,
+      });
+    }
+    this.response({ res, message: "finde Book ", code: 200, data: books });
+    console.log("query is", bookName);
   }
 })();

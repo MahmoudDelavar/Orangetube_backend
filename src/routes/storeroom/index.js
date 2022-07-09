@@ -11,7 +11,7 @@ router.post(
   controller.addProduct
 );
 
-router.get("/", controller.getProducts);
+router.get("/edit", controller.getProduct);
 //------------------------------------------
 
 module.exports = router;
