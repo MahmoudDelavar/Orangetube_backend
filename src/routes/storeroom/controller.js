@@ -45,15 +45,16 @@ module.exports = new (class extends controller {
   }
 
   async getProducts(req, res) {
-    let category = req.query.category;
-    let books = await this.Product.find({ category: category })
+    const category = req.query.category;
+    const books = await this.Product.find({ category: category })
       .sort({ createdAt: -1 })
       .exec();
     this.response({ res, message: "load the Books ", code: 200, data: books });
   }
+
   async getProduct(req, res) {
-    let bookName = req.query.title;
-    let books = await this.Product.findOne({ title: bookName }).exec();
+    const bookName = req.query.title;
+    const books = await this.Product.findOne({ title: bookName }).exec();
 
     if (!books) {
       return this.response({
@@ -63,6 +64,10 @@ module.exports = new (class extends controller {
       });
     }
     this.response({ res, message: "finde Book ", code: 200, data: books });
-    console.log("query is", bookName);
+  }
+
+  async updateProduct(req, res) {
+    const bookName = req.params.bookName;
+    const boos = await this.Product.updateOne();
   }
 })();
