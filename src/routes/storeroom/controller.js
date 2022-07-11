@@ -67,7 +67,38 @@ module.exports = new (class extends controller {
   }
 
   async updateProduct(req, res) {
-    const bookName = req.params.bookName;
-    const boos = await this.Product.updateOne();
+    const bookName = req.query.title;
+    const book = await this.Product.findOne({ title: bookName }).exec();
+    if (!book) {
+      return this.response({
+        res,
+        message: "کتاب مورد نظر یافت نشد  ",
+        code: 400,
+      });
+    }
+
+    console.log("bookName=", bookName);
+    const editedBook = await this.Product.findByIdAndUpdate(
+      book._id,
+      {
+        $set: {
+          title: req.body.title,
+          writer: req.body.writer,
+          count: req.body.count,
+          pric: req.body.pric,
+          explan: req.body.explan,
+          category: req.body.category,
+        },
+      },
+      { new: true }
+    );
+    this.response({
+      res,
+      message: "اطلاعات ویرایش شد ",
+      code: 200,
+      data: editedBook,
+    });
+
+    console.log("Updated Book : ", editedBook);
   }
 })();
