@@ -5,6 +5,16 @@ const _ = require("lodash");
 
 module.exports = new (class extends controller {
   //----------Storeroome Controllers-----
+  async getAllProducts(req, res) {
+    const result = await this.Product.find().exec();
+    this.response({
+      res,
+      code: 200,
+      message: "Load All books",
+      data: result,
+    });
+  }
+
   async addProduct(req, res) {
     let product = await this.Product.findOne({ title: req.body.title });
     if (product) {

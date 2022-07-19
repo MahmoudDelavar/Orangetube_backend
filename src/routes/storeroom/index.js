@@ -12,6 +12,7 @@ router.post(
 );
 
 router.get("/", controller.getProducts);
+router.get("/all", controller.getAllProducts);
 router.get("/edit", controller.getProduct);
 
 router.put("/", controller.updateProduct);
