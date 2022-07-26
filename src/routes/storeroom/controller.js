@@ -6,7 +6,7 @@ const _ = require("lodash");
 module.exports = new (class extends controller {
   //----------Storeroome Controllers-----
   async getAllProducts(req, res) {
-    const result = await this.Product.find().exec();
+    const result = await this.Product.find().sort({ createdAt: -1 }).exec();
     this.response({
       res,
       code: 200,
@@ -16,6 +16,7 @@ module.exports = new (class extends controller {
   }
 
   async addProduct(req, res) {
+    console.log("from redux", req.body);
     let product = await this.Product.findOne({ title: req.body.title });
     if (product) {
       return this.response({
