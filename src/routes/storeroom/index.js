@@ -13,9 +13,9 @@ router.post(
 
 router.get("/", controller.getProducts);
 router.get("/all", controller.getAllProducts);
-router.get("/edit", controller.getProduct);
+router.get("/getOne", controller.getOneProduct);
 
-router.put("/", controller.updateProduct);
+router.put("/edit", controller.updateProduct);
 //------------------------------------------
 
 module.exports = router;

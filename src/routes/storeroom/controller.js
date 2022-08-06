@@ -4,7 +4,7 @@ const _ = require("lodash");
 //-----------------------------------------------------
 
 module.exports = new (class extends controller {
-  //----------Storeroome Controllers-----
+  //===============Storeroome Controllers===============
   async getAllProducts(req, res) {
     const result = await this.Product.find().sort({ createdAt: -1 }).exec();
     this.response({
@@ -15,6 +15,7 @@ module.exports = new (class extends controller {
     });
   }
 
+  //--------------Add Product
   async addProduct(req, res) {
     console.log("from redux", req.body);
     let product = await this.Product.findOne({ title: req.body.title });
@@ -55,6 +56,7 @@ module.exports = new (class extends controller {
     console.log("added new book to database ");
   }
 
+  //--------------Get Product
   async getProducts(req, res) {
     const category = req.query.category;
     const books = await this.Product.find({ category: category })
@@ -62,23 +64,29 @@ module.exports = new (class extends controller {
       .exec();
     this.response({ res, message: "load the Books ", code: 200, data: books });
   }
-
-  async getProduct(req, res) {
+  //--------------Get One Product
+  async getOneProduct(req, res) {
     const bookName = req.query.title;
     const books = await this.Product.findOne({ title: bookName }).exec();
 
     if (!books) {
       return this.response({
         res,
-        message: "کتاب مورد نظر یافت ",
+        message: " کتاب مورد نظر یافت نشد ",
         code: 400,
       });
     }
-    this.response({ res, message: "finde Book ", code: 200, data: books });
+    this.response({
+      res,
+      message: "کتاب مورد نظر یافت شد  ",
+      code: 200,
+      data: books,
+    });
   }
 
+  //--------------Edit Product
   async updateProduct(req, res) {
-    const bookName = req.query.title;
+    const bookName = req.body.oldTitle;
     const book = await this.Product.findOne({ title: bookName }).exec();
     if (!book) {
       return this.response({
@@ -88,7 +96,6 @@ module.exports = new (class extends controller {
       });
     }
 
-    console.log("bookName=", bookName);
     const editedBook = await this.Product.findByIdAndUpdate(
       book._id,
       {
@@ -110,6 +117,6 @@ module.exports = new (class extends controller {
       data: editedBook,
     });
 
-    console.log("Updated Book : ", editedBook);
+    console.log("Updated Book info");
   }
 })();
