@@ -55,7 +55,7 @@ module.exports = new (class extends controller {
       res,
       message: "خوش آمدید ",
       code: 200,
-      data: { token },
+      data: token,
     });
   }
 })();

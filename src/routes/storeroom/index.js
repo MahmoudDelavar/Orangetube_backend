@@ -16,6 +16,8 @@ router.get("/all", controller.getAllProducts);
 router.get("/getOne", controller.getOneProduct);
 
 router.put("/edit", controller.updateProduct);
+
+router.delete("/deleteOne", controller.deleteOneProduct);
 //------------------------------------------
 
 module.exports = router;

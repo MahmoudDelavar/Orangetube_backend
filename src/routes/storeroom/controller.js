@@ -119,4 +119,17 @@ module.exports = new (class extends controller {
 
     console.log("Updated Book info");
   }
+
+  //--------------Delete One Product
+  async deleteOneProduct(req, res) {
+    const bookName = req.query.title;
+    const book = await this.Product.find({ title: bookName }).exec();
+    if (!book) {
+      return this.response({ res, message: "کتاب یافت نشد", code: 400 });
+    }
+
+    const deleted = await this.Product.deleteOne({ title: bookName });
+    this.response({ res, message: `کتاب "${bookName}" حذف شد ` });
+    console.log("Deleted One Book", deleted);
+  }
 })();
