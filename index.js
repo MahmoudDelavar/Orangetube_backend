@@ -7,6 +7,7 @@ const config = require("config");
 const router = require("./src/routes");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const winston = require("winston");
 //-----------------------------------
 const app = express();
 
@@ -34,7 +35,8 @@ mongoose
   .catch((err) => dbdebug("Cant be Connetc:", err));
 
 //-----------------------------------
-
+winston.add(new winston.transports.File({ filename: "logErrors.log" }));
+//-----------------------------------
 app.use("/api", router);
 const PORT = config.get("PORT");
 app.listen(PORT, () => debug(`Listening on PORT: ${PORT}`));
