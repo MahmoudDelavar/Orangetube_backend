@@ -34,7 +34,15 @@ mongoose
   .then(() => dbdebug("Connected to database"))
   .catch((err) => dbdebug("Cant be Connetc:", err));
 
-//-----------------------------------
+//-------------- handle Errors---------------------
+process.on("uncaughtException", (ex) => {
+  console.log("uncaught Exception - sync Error");
+  winston.error(ex.message, ex);
+});
+process.on("unhandledRejection", (ex) => {
+  console.log("unhandled Rejection - async Error");
+  winston.error(ex.message, ex);
+});
 winston.add(new winston.transports.File({ filename: "logErrors.log" }));
 //-----------------------------------
 app.use("/api", router);
