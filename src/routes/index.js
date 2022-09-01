@@ -6,7 +6,7 @@ const { isLoggined } = require("./../middlewares/auth");
 const error = require("./../middlewares/error");
 
 router.use("/auth", authRouter);
-router.use("/storeroom", isLoggined, storeroomRouter);
+router.use("/storeroom", storeroomRouter);
 
 router.use(error);
 module.exports = router;

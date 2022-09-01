@@ -13,10 +13,10 @@ const app = express();
 
 //-----------------------------------
 app.use(express.json());
-// app.use(cors({ origin: true }));
-// app.use(cors({ headers: true }));
-// app.use(cors({ methods: true }));
-app.use(express.urlencoded({ extended: true }));
+app.use(cors({ origin: true }));
+app.use(cors({ headers: true }));
+app.use(cors({ methods: true }));
+app.use(express.urlencoded({ extended: false }));
 app.use(express.static("public"));
 app.use(bodyParser.json());
 

@@ -6,6 +6,8 @@ const _ = require("lodash");
 module.exports = new (class extends controller {
   //===============Storeroome Controllers===============
   async getAllProducts(req, res) {
+    const token = req.header("token");
+    console.log("token is=", token);
     const result = await this.Product.find().sort({ createdAt: -1 }).exec();
     this.response({
       res,

@@ -5,6 +5,7 @@ const User = require("./../models/user");
 //--------------------------------------------
 async function isLoggined(req, res, next) {
   const token = req.header("token");
+  console.log("token recived=", token);
 
   if (!token) {
     res.status(400).send("acsecc denied");
@@ -13,7 +14,7 @@ async function isLoggined(req, res, next) {
   try {
     const decoded = jwt.verify(token, config.get("jwt_key"));
     const user = await User.findById(decoded._id);
-    req.user = user;
+    res.user = user;
     next();
   } catch (ex) {
     res.status(400).send("invalid token");
