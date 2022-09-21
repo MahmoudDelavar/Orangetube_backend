@@ -3,7 +3,7 @@ const router = express.Router();
 const controller = require("./controller");
 const { storeroomValidator } = require("./validator");
 //-----------------------------------------
-
+router.post("/uploadPic", controller.uploadPic);
 router.post(
   "/",
   storeroomValidator(),

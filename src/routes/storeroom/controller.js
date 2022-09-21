@@ -1,10 +1,50 @@
 const controller = require("./../controller");
 const _ = require("lodash");
+const multer = require("multer");
 
+//-----------------------------------------------------
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "./public/uploads/productsPic/");
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    cb(null, file.fieldname + "-" + uniqueSuffix);
+  },
+  fileFilter: (req, file, cb) => {
+    const ext = path.extname(file.originalname + "loaded");
+    if (ext !== ".jpg" || ".png") {
+      return cb(res.status(400).send("only jpg or png allowed "), false);
+    }
+    cb(null, true);
+  },
+});
+const upload = multer({ storage: storage }).single("file");
 //-----------------------------------------------------
 
 module.exports = new (class extends controller {
   //===============Storeroome Controllers===============
+
+  //----------Load products pic Controller
+  async uploadPic(req, res) {
+    upload(req, res, (err) => {
+      if (err) {
+        return this.response({
+          res,
+          code: 400,
+          message: `save failde #${err} `,
+        });
+      }
+      return this.response({
+        res,
+        code: 200,
+        data: { filePath: res.req.file.path, fileNeme: res.req.file.filename },
+        message: "success load products pic",
+      });
+    });
+  }
+  //--------------getAllProducts
+
   async getAllProducts(req, res) {
     const token = req.header("token");
     console.log("token is=", token);
@@ -19,7 +59,6 @@ module.exports = new (class extends controller {
 
   //--------------Add Product
   async addProduct(req, res) {
-    console.log("from redux", req.body);
     let product = await this.Product.findOne({ title: req.body.title });
     if (product) {
       return this.response({
@@ -38,6 +77,7 @@ module.exports = new (class extends controller {
         "pric",
         "explan",
         "category",
+        "picPath",
       ])
     );
 
@@ -53,6 +93,7 @@ module.exports = new (class extends controller {
         "pric",
         "explan",
         "category",
+        "picPath",
       ]),
     });
     console.log("added new book to database ");

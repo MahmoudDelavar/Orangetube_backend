@@ -9,6 +9,7 @@ const productSchema = new mongoose.Schema({
   pric: { type: Number, required: true },
   count: { type: Number, required: true },
   category: { type: String, required: true },
+  picPath: { type: String, default: "public/uploads/userAvatar/9enofj.jpg" },
 });
 productSchema.plugin(timestamp);
 module.exports = mongoose.model("Product", productSchema);

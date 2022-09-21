@@ -12,7 +12,8 @@ router.post(
   controller.register
 );
 router.post("/login", loginValidator(), controller.validate, controller.login);
-
+router.post("/avatar", controller.loadAvatar);
+router.post("/userbytoken", controller.userbytoken);
 //------------------------------------------
 
 module.exports = router;

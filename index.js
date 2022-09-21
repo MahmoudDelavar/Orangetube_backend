@@ -1,5 +1,8 @@
 require("express-async-errors");
 const express = require("express");
+var webpack = require("webpack");
+
+const path = require("path");
 const mongoose = require("mongoose");
 const debug = require("debug")("app:main");
 const dbdebug = require("debug")("app:db");
@@ -17,7 +20,7 @@ app.use(cors({ origin: true }));
 app.use(cors({ headers: true }));
 app.use(cors({ methods: true }));
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static("public"));
+app.use("/public", express.static("public"));
 app.use(bodyParser.json());
 
 //-----------------------------------

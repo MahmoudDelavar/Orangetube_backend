@@ -1,13 +1,18 @@
 const autoBind = require("auto-bind");
 const { validationResult } = require("express-validator");
 const User = require("./../models/user");
+const Video = require("./../models/video");
 const Product = require("./../models/product");
+const Subscribe = require("../models/subscribe");
+
 //---------------------------------------------------------
 module.exports = class {
   constructor() {
     autoBind(this);
     this.User = User;
     this.Product = Product;
+    this.Video = Video;
+    this.Subscribe = Subscribe;
   }
   vaildationBody(req, res) {
     const result = validationResult(req);
