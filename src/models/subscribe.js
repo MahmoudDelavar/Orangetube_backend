@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const timestamp = require("mongoose-timestamp");
-const User = require("./user");
+//------------------------------------------
 
 const subscribeSchema = new mongoose.Schema({
   userTo: {

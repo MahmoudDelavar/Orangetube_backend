@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const timestamp = require("mongoose-timestamp");
-const User = require("../models/user");
+//------------------------------------------
+
 const videoSchema = new mongoose.Schema({
   writer: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   title: { type: String },

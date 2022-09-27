@@ -4,6 +4,7 @@ const User = require("./../models/user");
 const Video = require("./../models/video");
 const Product = require("./../models/product");
 const Subscribe = require("../models/subscribe");
+const Comment = require("./../models/comment");
 
 //---------------------------------------------------------
 module.exports = class {
@@ -13,6 +14,7 @@ module.exports = class {
     this.Product = Product;
     this.Video = Video;
     this.Subscribe = Subscribe;
+    this.Comment = Comment;
   }
   vaildationBody(req, res) {
     const result = validationResult(req);

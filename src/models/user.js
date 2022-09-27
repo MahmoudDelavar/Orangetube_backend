@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const timestamp = require("mongoose-timestamp");
-const Books = require("../models/video");
 //------------------------------------------
 
 const userSchema = new mongoose.Schema({
