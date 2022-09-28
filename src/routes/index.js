@@ -5,6 +5,7 @@ const storeroomRouter = require("./storeroom");
 const vidoeRouter = require("./videos");
 const ScubscribeRouter = require("./subscribe");
 const CommentsRouter = require("./comment");
+const LikeRouer = require("./likeAndDisLike");
 const { isLoggined } = require("./../middlewares/auth");
 const error = require("./../middlewares/error");
 
@@ -13,6 +14,7 @@ router.use("/storeroom", storeroomRouter);
 router.use("/videos", vidoeRouter);
 router.use("/subscribe", ScubscribeRouter);
 router.use("/comments", CommentsRouter);
+router.use("/likeAndDislike", LikeRouer);
 
 router.use(error);
 module.exports = router;
