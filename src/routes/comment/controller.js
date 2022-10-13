@@ -48,5 +48,6 @@ module.exports = new (class extends controller {
       data: comments,
       message: "success load this post comments",
     });
+    
   }
 })();

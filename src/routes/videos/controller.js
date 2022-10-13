@@ -67,7 +67,6 @@ module.exports = new (class extends controller {
         "thumbnail",
       ]),
     });
-    console.log("added new Video to database ");
   }
   //--------------load Video
   async loadVideo(req, res) {
@@ -90,11 +89,7 @@ module.exports = new (class extends controller {
   //--------------thumbnail Video
   async thumbnailVideo(req, res) {
     ffmpeg.ffprobe(req.body.filePath, function (err, metadata) {
-      console.dir(metadata);
-      console.log(metadata.format.duration);
       fileDuration = metadata.format.duration;
-
-      console.log(".ffprobe ERR:", err);
     });
     ffmpeg(req.body.filePath)
       .on("filenames", function (filenames) {
@@ -102,8 +97,6 @@ module.exports = new (class extends controller {
         thumbFliePath = "public/uploads/thumbnails/" + filenames[0];
       })
       .on("end", () => {
-        console.log("Screenshots taken");
-
         this.response({
           res,
           code: 202,

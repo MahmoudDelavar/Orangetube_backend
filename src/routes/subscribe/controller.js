@@ -19,7 +19,6 @@ module.exports = new (class extends controller {
     const subscribe = new this.Subscribe({ userTo, userFrom });
     await subscribe.save();
     this.response({ res, code: 200, message: "success", data: null });
-    // console.log("Subscrined");
   }
 
   //--------------Unsubscribe
@@ -71,7 +70,6 @@ module.exports = new (class extends controller {
       isSubscribe = true;
     }
     this.response({ res, code: 200, message: "success", data: isSubscribe });
-    // console.log("isSubscribe", isSubscribe);
   }
   //--------------subscribe Number
 
@@ -100,6 +98,7 @@ module.exports = new (class extends controller {
   //--------------finde all subscribed coounts and send vidoes to fornt
   async subscribtions(req, res) {
     const userFrom = req.body.userFrom;
+
     if (!userFrom) {
       return this.response({
         res,
@@ -108,6 +107,7 @@ module.exports = new (class extends controller {
         message: "subscribtions failed",
       });
     }
+
     const subscrebeds = await this.Subscribe.find({ userFrom }).exec();
 
     let subscribeUse = [];

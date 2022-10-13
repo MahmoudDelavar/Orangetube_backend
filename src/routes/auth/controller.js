@@ -60,6 +60,12 @@ module.exports = new (class extends controller {
     );
     const salt = await bcrypt.genSalt(10);
     user.password = await bcrypt.hash(user.password, salt);
+
+    if (!user.avatarPath) {
+      user.avatarPath =
+        "public/uploads/userAvatar/file-1664548318360-190705306";
+    }
+
     await user.save();
     this.response({
       res,
@@ -110,6 +116,7 @@ module.exports = new (class extends controller {
     try {
       const decoded = jwt.verify(token, config.get("jwt_key"));
       const user = await this.User.findById(decoded._id);
+
       this.response({
         res,
         code: 200,
