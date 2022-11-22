@@ -1,7 +1,7 @@
 require("express-async-errors");
 const express = require("express");
 var webpack = require("webpack");
-
+const passport = require("passport");
 const path = require("path");
 const mongoose = require("mongoose");
 const debug = require("debug")("app:main");
@@ -15,13 +15,15 @@ const winston = require("winston");
 const app = express();
 
 //-----------------------------------
-app.use(express.json());
+app.use(express.json({ limit: "15mb", extended: true }));
 app.use(cors({ origin: true }));
 app.use(cors({ headers: true }));
 app.use(cors({ methods: true }));
-app.use(express.urlencoded({ extended: false }));
+app.use(
+  express.urlencoded({ extended: true, limit: "15mb", parameterLimit: 150000 })
+);
 app.use("/public", express.static("public"));
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: "15mb", parameterLimit: 150000 }));
 
 //-----------------------------------
 app.use((req, res, next) => {

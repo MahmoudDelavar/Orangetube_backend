@@ -22,7 +22,10 @@ const storage = multer.diskStorage({
     cb(null, true);
   },
 });
-const upload = multer({ storage: storage }).single("file");
+const upload = multer({
+  storage: storage,
+  limits: { fileSize: "15mb" },
+}).single("file");
 //-----------------------------------------------------
 
 module.exports = new (class extends controller {
@@ -63,16 +66,18 @@ module.exports = new (class extends controller {
 
     if (!user.avatarPath) {
       user.avatarPath =
-        "public/uploads/userAvatar/file-1664548318360-190705306";
+        "public/uploads/userAvatar/file-1666470433410-149842360";
     }
 
     await user.save();
+    const token = jwt.sign({ _id: user.id }, config.get("jwt_key"));
     this.response({
       res,
       message: "ثبت نام با موفقیت انجام شد",
       code: 202,
-      data: _.pick(user, ["userName", "email", "avatarPath"]),
+      data: token,
     });
+    console.log("register token", token);
   }
 
   //----------login Controller--------
@@ -100,6 +105,7 @@ module.exports = new (class extends controller {
       code: 200,
       data: token,
     });
+    console.log("login token", token);
   }
   //----------User By Id Controller--------
   async userbytoken(req, res) {

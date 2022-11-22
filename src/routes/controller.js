@@ -7,6 +7,7 @@ const Subscribe = require("../models/subscribe");
 const Comment = require("./../models/comment");
 const like = require("../models/like");
 const dislike = require("../models/dislike");
+const link = require("../models/link");
 
 //---------------------------------------------------------
 module.exports = class {
@@ -19,6 +20,7 @@ module.exports = class {
     this.Comment = Comment;
     this.Like = like;
     this.DisLike = dislike;
+    this.Link = link;
   }
   vaildationBody(req, res) {
     const result = validationResult(req);

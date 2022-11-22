@@ -2,6 +2,8 @@ const controller = require("./../controller");
 const _ = require("lodash");
 const multer = require("multer");
 const ffmpeg = require("fluent-ffmpeg");
+const path = require("path");
+
 //-----------------------------------------------------
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -19,7 +21,10 @@ const storage = multer.diskStorage({
     cb(null, true);
   },
 });
-const upload = multer({ storage: storage }).single("file");
+const upload = multer({
+  storage: storage,
+  limits: { fileSize: "5mb" },
+}).single("file");
 
 //-----------------------------------------------------
 let thumbFliePath = "";
